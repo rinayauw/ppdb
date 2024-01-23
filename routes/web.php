@@ -31,12 +31,16 @@ Route::resource('users', UserController::class);
 
 Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'roleAdmin'], function () {
-        Route::resource('articles', ArticleController::class);
-        Route::resource('extracurriculars', ExtracurricularController::class);
-        Route::resource('majors', MajorController::class);
+        // Route::resource('articles', ArticleController::class);
+        // Route::resource('extracurriculars', ExtracurricularController::class);
+        // Route::resource('majors', MajorController::class);
+        // Route::resource('students', StudentController::class);
     });
 
     Route::group(['middleware' => 'roleTeacher'], function () {
+        Route::resource('articles', ArticleController::class);
+        Route::resource('extracurriculars', ExtracurricularController::class);
+        Route::resource('majors', MajorController::class);
         Route::resource('students', StudentController::class);
     });
 });
