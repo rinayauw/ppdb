@@ -23,7 +23,7 @@
     <div class="container-fluid">
         <div class="row">
             <!-- left column -->
-            <div class="col-12">
+            <div class="col-6">
                 <!-- general form elements -->
                 <div class="card card-primary">
                     <div class="card-header">
@@ -57,11 +57,11 @@
                                 @enderror
                             </div>
 
-                            <div class="mb-3">
-                                <label for="gender" class="form-label">Gender</label>
-                                <select class="form-select @error('gender') is-invalid @enderror" id="gender" name="gender" required autocomplete="gender" autofocus>
-                                    <option value="male" {{ old('gender') == 'male' ? 'selected' : null }}>Male</option>
-                                    <option value="female" {{ old('gender') == 'female' ? 'selected' : null }}>Female</option>
+                            <div class="form-group">
+                                <label>Gender</label>
+                                <select class="form-control @error('gender') is-invalid @enderror" name="gender" required autocomplete="gender" autofocus>
+                                    <option value="male" {{ old('gender') == "male" ? 'selected' : null  }}>Male</option>
+                                    <option value="female" {{ old('gender') == "female" ? 'selected' : null  }}>Famele</option>
                                 </select>
 
                                 @error('gender')
@@ -70,15 +70,14 @@
                                 </span>
                                 @enderror
                             </div>
-
-                            <div class="mb-3">
-                                <label for="religion" class="form-label">Religion</label>
-                                <select class="form-select @error('religion') is-invalid @enderror" id="religion" name="religion" required autocomplete="religion" autofocus>
-                                    <option value="islam" {{ old('religion') == 'islam' ? 'selected' : null }}>Islam</option>
-                                    <option value="kristen" {{ old('religion') == 'kristen' ? 'selected' : null }}>Kristen</option>
-                                    <option value="hindu" {{ old('religion') == 'hindu' ? 'selected' : null }}>Hindu</option>
-                                    <option value="konghucu" {{ old('religion') == 'konghucu' ? 'selected' : null }}>Konghucu</option>
-                                    <option value="buddha" {{ old('religion') == 'buddha' ? 'selected' : null }}>Buddha</option>
+                            <div class="form-group">
+                                <label>Religion</label>
+                                <select class="form-control @error('religion') is-invalid @enderror" name="religion" required autocomplete="religion" autofocus>
+                                    <option value="islam" {{ old('religion') == "islam" ? 'selected' : null  }}>Islam</option>
+                                    <option value="kristen" {{ old('religion') == "kristen" ? 'selected' : null  }}>Kristen</option>
+                                    <option value="buddha" {{ old('religion') == "buddha" ? 'selected' : null  }}>Buddha</option>
+                                    <option value="hindu" {{ old('religion') == "hindu" ? 'selected' : null  }}>Hindu</option>
+                                    <option value="konghucu" {{ old('religion') == "konghucu" ? 'selected' : null  }}>Konghucu</option>
                                 </select>
 
                                 @error('religion')
@@ -87,10 +86,11 @@
                                 </span>
                                 @enderror
                             </div>
-
                             <div class="mb-3">
-                                <label for="address" class="form-label">Address</label>
-                                <input type="text" class="form-control @error('address') is-invalid @enderror" id="address" name="address" value="{{ old('address') }}" required autocomplete="address" autofocus>
+                                <div class="form-group">
+                                    <label>Address</label>
+                                    <textarea class="form-control @error('address') is-invalid @enderror" rows="3" placeholder="Enter ..." name="address" required autocomplete="address" autofocus>{{ old('address') }}</textarea>
+                                </div>
 
                                 @error('address')
                                 <span class="invalid-feedback" role="alert">
@@ -99,12 +99,12 @@
                                 @enderror
                             </div>
 
-                            <div class="mb-3">
-                                <label for="status" class="form-label">Status</label>
-                                <select class="form-select @error('status') is-invalid @enderror" id="status" name="status" required autocomplete="status" autofocus>
-                                    <option value="pending" {{ old('status') == 'pending' ? 'selected' : null }}>Pending</option>
-                                    <option value="accepted" {{ old('status') == 'accepted' ? 'selected' : null }}>Accepted</option>
-                                    <option value="rejected" {{ old('status') == 'rejected' ? 'selected' : null }}>Rejected</option>
+                            <div class="form-group">
+                                <label>Status</label>
+                                <select class="form-control @error('status') is-invalid @enderror" name="status" required autocomplete="status" autofocus>
+                                    <option value="pending" {{ old('status') == "pending" ? 'selected' : null  }}>Pending</option>
+                                    <option value="accepted" {{ old('status') == "accepted" ? 'selected' : null  }}>Accepted</option>
+                                    <option value="rejected" {{ old('status') == "rejected" ? 'selected' : null  }}>Rejected</option>
                                 </select>
 
                                 @error('status')
@@ -113,10 +113,9 @@
                                 </span>
                                 @enderror
                             </div>
-
-                            <div class="mb-3">
-                                <label for="major_id" class="form-label">Major</label>
-                                <select class="form-select @error('major_id') is-invalid @enderror" id="major_id" name="major_id" required autocomplete="major_id" autofocus>
+                            <div class="form-group">
+                                <label>Major</label>
+                                <select class="form-control @error('major_id') is-invalid @enderror" name="major_id" required autocomplete="major_id" autofocus>
                                     @foreach($majors as $major)
                                     <option value="{{ $major->id }}" {{ old('major_id') == $major->id ? 'selected' : null }}>{{ $major->name }}</option>
                                     @endforeach
@@ -128,10 +127,9 @@
                                 </span>
                                 @enderror
                             </div>
-
-                            <div class="mb-3">
-                                <label for="extracurricular_id" class="form-label">Extracurricular</label>
-                                <select class="form-select @error('extracurricular_id') is-invalid @enderror" id="extracurricular_id" name="extracurricular_id" required autocomplete="extracurricular_id" autofocus>
+                            <div class="form-group">
+                                <label>Extracurricular</label>
+                                <select class="form-control @error('extracurricular_id') is-invalid @enderror" name="extracurricular_id" required autocomplete="extracurricular_id" autofocus>
                                     @foreach($extracurriculars as $extracurricular)
                                     <option value="{{ $extracurricular->id }}" {{ old('extracurricular_id') == $extracurricular->id ? 'selected' : null }}>{{ $extracurricular->name }}</option>
                                     @endforeach
@@ -143,7 +141,6 @@
                                 </span>
                                 @enderror
                             </div>
-
                             <div class="mb-3">
                                 <label for="photo" class="form-label">Photo</label>
                                 <input type="file" class="form-control @error('photo') is-invalid @enderror" id="photo" name="photo" value="{{ old('photo') }}" required autocomplete="photo" autofocus>

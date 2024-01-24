@@ -30,6 +30,11 @@ class ExtracurricularController extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate([
+            'name' => 'required|string|min:3',
+        ]);
+
         Extracurricular::create([
             'name' => $request->name,
         ]);
@@ -59,6 +64,10 @@ class ExtracurricularController extends Controller
      */
     public function update(Request $request, Extracurricular $extracurricular)
     {
+        $request->validate([
+            'name' => 'required|string|min:3',
+        ]);
+
         $extracurricular->update([
             'name' => $request->name,
         ]);

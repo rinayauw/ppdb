@@ -30,6 +30,10 @@ class MajorController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|string|min:3',
+        ]);
+
         Major::create([
             'name' => $request->name,
         ]);
@@ -59,6 +63,11 @@ class MajorController extends Controller
      */
     public function update(Request $request, Major $major)
     {
+
+        $request->validate([
+            'name' => 'required|string|min:3',
+        ]);
+
         $major->update([
             'name' => $request->name,
         ]);

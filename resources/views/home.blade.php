@@ -235,6 +235,22 @@
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('extracurriculars.index') }}" class="nav-link">
+                                <i class="nav-icon far fa-image"></i>
+                                <p>
+                                    Extracurricular
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('users.index') }}" class="nav-link">
+                                <i class="nav-icon far fa-image"></i>
+                                <p>
+                                    User
+                                </p>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->

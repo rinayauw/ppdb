@@ -35,6 +35,18 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|string|min:3',
+            'birth' => 'required|date',
+            'gender' => 'required|string',
+            'religion' => 'required|string',
+            'status' => 'required|string',
+            'address' => 'required|string',
+            'major_id' => 'required|exists:majors,id',
+            'extracurricular_id' => 'required|exists:extracurriculars,id',
+            'photo' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+        ]);
+
         $student = Student::create([
             'name' => $request->name,
             'birth' => $request->birth,
@@ -78,6 +90,19 @@ class StudentController extends Controller
      */
     public function update(Request $request, Student $student)
     {
+
+        $request->validate([
+            'name' => 'required|string|min:3',
+            'birth' => 'required|date',
+            'gender' => 'required|string',
+            'religion' => 'required|string',
+            'status' => 'required|string',
+            'address' => 'required|string',
+            'major_id' => 'required|exists:majors,id',
+            'extracurricular_id' => 'required|exists:extracurriculars,id',
+            'photo' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+        ]);
+
         $student->update([
             'name' => $request->name,
             'birth' => $request->birth,

@@ -194,7 +194,7 @@
                         <img src="{{ asset('admin-lte/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">Alexander Pierce</a>
+                        <a href="#" class="d-block">{{ auth()->user()->name }}</a>
                     </div>
                 </div>
 
@@ -244,6 +244,14 @@
                                 <i class="nav-icon far fa-image"></i>
                                 <p>
                                     Extracurriculars
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('users.index') }}" class="nav-link">
+                                <i class="nav-icon far fa-image"></i>
+                                <p>
+                                    Users
                                 </p>
                             </a>
                         </li>
@@ -305,8 +313,6 @@
     <script src="{{ asset('admin-lte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('admin-lte/dist/js/adminlte.js') }}"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="{{ asset('admin-lte/dist/js/demo.js') }}"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="{{ asset('admin-lte/dist/js/pages/dashboard.js') }}"></script>
     <!-- DataTables  & Plugins -->

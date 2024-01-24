@@ -30,6 +30,11 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|string|min:3',
+            'description' => 'required|string',
+        ]);
+
         $article = Article::create([
             'name' => $request->name,
             'description' => $request->description,
@@ -65,6 +70,12 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
+
+        $request->validate([
+            'name' => 'required|string|min:3',
+            'description' => 'required|string',
+        ]);
+
         $article->update([
             'name' => $request->name,
             'description' => $request->description,
