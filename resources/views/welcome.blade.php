@@ -10,7 +10,7 @@
     <!-- ===============================================-->
     <!--    Document Title-->
     <!-- ===============================================-->
-    <title>Foodwagon | Responsive, Ecommerce &amp; Business Templatee</title>
+    <title>PPDB</title>
 
 
     <!-- ===============================================-->
@@ -60,7 +60,11 @@
                     <form class="d-flex mt-4 mt-lg-0 ms-lg-auto ms-xl-0">
                         <div class="input-group-icon pe-2">
                         </div>
+                        @if(auth()->check())
+                        <a class="btn btn-white shadow-warning text-black" href="{{ route('home') }}"> <i class="fas fa-user me-2"></i>Go to Dashboard</a>
+                        @else
                         <a class="btn btn-white shadow-warning text-black" href="{{ route('login') }}"> <i class="fas fa-user me-2"></i>Login</a>
+                        @endif
                     </form>
                 </div>
             </div>
