@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use App\Models\Extracurricular;
 use App\Models\Major;
 use App\Models\Student;
@@ -31,7 +32,8 @@ class HomeController extends Controller
         $extracurriculars = Extracurricular::count();
         $students = Student::count();
         $users = User::count();
+        $articles = Article::count();
 
-        return view('home', compact('majors', 'extracurriculars', 'students', 'users'));
+        return view('home', compact('majors', 'extracurriculars', 'students', 'users', 'articles'));
     }
 }
