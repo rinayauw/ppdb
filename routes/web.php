@@ -26,21 +26,22 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::resource('users', UserController::class);
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::group(['middleware' => 'roleAdmin'], function () {
-        // Route::resource('articles', ArticleController::class);
-        // Route::resource('extracurriculars', ExtracurricularController::class);
-        // Route::resource('majors', MajorController::class);
-        // Route::resource('students', StudentController::class);
-    });
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-    Route::group(['middleware' => 'roleTeacher'], function () {
-        Route::resource('articles', ArticleController::class);
-        Route::resource('extracurriculars', ExtracurricularController::class);
-        Route::resource('majors', MajorController::class);
-        Route::resource('students', StudentController::class);
-    });
+    // Route::group(['middleware' => 'roleAdmin'], function () {
+    // Route::resource('articles', ArticleController::class);
+    // Route::resource('extracurriculars', ExtracurricularController::class);
+    // Route::resource('majors', MajorController::class);
+    // Route::resource('students', StudentController::class);
+    // });
+
+    // Route::group(['middleware' => 'roleTeacher'], function () {
+    Route::resource('articles', ArticleController::class);
+    Route::resource('extracurriculars', ExtracurricularController::class);
+    Route::resource('majors', MajorController::class);
+    Route::resource('students', StudentController::class);
+    // });
 });

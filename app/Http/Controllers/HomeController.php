@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Extracurricular;
+use App\Models\Major;
+use App\Models\Student;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +27,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $majors = Major::count();
+        $extracurriculars = Extracurricular::count();
+        $students = Student::count();
+        $users = User::count();
+
+        return view('home', compact('majors', 'extracurriculars', 'students', 'users'));
     }
 }
