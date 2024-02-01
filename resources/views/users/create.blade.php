@@ -47,14 +47,15 @@
                             </span>
                             @enderror
                         </div>
-                        <div class="mb-3">
-                            <label for="role" class="form-label">Role</label>
-                            <select class="form-select @error('role') is-invalid @enderror" id="role" name="role" required autocomplete="role" autofocus>
-                                <option value="admin" {{ old('role') == 'admin' ? 'selected' : null }}>Admin</option>
-                                <option value="teacher" {{ old('role') == 'teacher' ? 'selected' : null }}>Teacher</option>
+                        <div class="form-group">
+                            <label>Role</label>
+                            <select class="form-control @error('role') is-invalid @enderror" name="role" required autocomplete="role" autofocus>
+                                @foreach(\App\Enums\RoleEnum::all() as $value => $label)
+                                <option value="{{ $value }}" {{ old('role') == $value ? 'selected' : null }}>{{ $label }}</option>
+                                @endforeach
                             </select>
 
-                            @error('role')
+                            @error('religion')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>

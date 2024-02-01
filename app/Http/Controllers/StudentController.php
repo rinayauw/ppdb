@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StudentStoreRequest;
+use App\Http\Requests\StudentUpdateRequest;
 use App\Models\Student;
 use App\Models\Major;
 use App\Models\Extracurricular;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class StudentController extends Controller
 {
@@ -33,30 +37,10 @@ class StudentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|string|min:3',
-            'birth' => 'required|date',
-            'gender' => 'required|string',
-            'religion' => 'required|string',
-            'status' => 'required|string',
-            'address' => 'required|string',
-            'major_id' => 'required|exists:majors,id',
-            'extracurricular_id' => 'required|exists:extracurriculars,id',
-            'photo' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
-        ]);
 
-        $student = Student::create([
-            'name' => $request->name,
-            'birth' => $request->birth,
-            'gender' => $request->gender,
-            'religion' => $request->religion,
-            'status' => $request->status,
-            'address' => $request->address,
-            'major_id' => $request->major_id,
-            'extracurricular_id' => $request->extracurricular_id,
-        ]);
+    public function store(StudentStoreRequest $request)
+    {
+        $student = Student::create($request->except(['photo']));
 
         if ($request->hasFile('photo') && $request->file('photo')->isValid()) {
             $student->addMediaFromRequest('photo')->toMediaCollection('photo');
@@ -88,31 +72,9 @@ class StudentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Student $student)
+    public function update(StudentUpdateRequest $request, Student $student)
     {
-
-        $request->validate([
-            'name' => 'required|string|min:3',
-            'birth' => 'required|date',
-            'gender' => 'required|string',
-            'religion' => 'required|string',
-            'status' => 'required|string',
-            'address' => 'required|string',
-            'major_id' => 'required|exists:majors,id',
-            'extracurricular_id' => 'required|exists:extracurriculars,id',
-            'photo' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
-        ]);
-
-        $student->update([
-            'name' => $request->name,
-            'birth' => $request->birth,
-            'gender' => $request->gender,
-            'religion' => $request->religion,
-            'status' => $request->status,
-            'address' => $request->address,
-            'major_id' => $request->major_id,
-            'extracurricular_id' => $request->extracurricular_id,
-        ]);
+        $student->update($request->except(['photo']));
 
         if ($request->hasFile('photo') && $request->file('photo')->isValid()) {
             $student->clearMediaCollection('photo');
@@ -120,8 +82,9 @@ class StudentController extends Controller
         }
 
         session()->flash('status', 'Data updated successfully');
-        return to_route('students.index');
+        return to_route('Students.index');
     }
+
 
     /**
      * Remove the specified resource from storage.

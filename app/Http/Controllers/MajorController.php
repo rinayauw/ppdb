@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\MajorStoreRequest;
+use App\Http\Requests\MajorUpdateRequest;
 use App\Models\Major;
 use Illuminate\Http\Request;
 
@@ -28,15 +30,9 @@ class MajorController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(MajorStoreRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|min:3',
-        ]);
-
-        Major::create([
-            'name' => $request->name,
-        ]);
+        $major = Major::create($request->all());
 
         session()->flash('status', 'Data created successfully');
         return to_route('majors.index');
@@ -61,16 +57,9 @@ class MajorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Major $major)
+    public function update(MajorUpdateRequest $request, Major $major)
     {
-
-        $request->validate([
-            'name' => 'required|string|min:3',
-        ]);
-
-        $major->update([
-            'name' => $request->name,
-        ]);
+        $major->update($request->all());
 
         session()->flash('status', 'Data updated successfully');
         return to_route('majors.index');

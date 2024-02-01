@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ArticleStoreRequest;
+use App\Http\Requests\ArticleUpdateRequest;
 use App\Models\Article;
-use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
@@ -28,17 +29,9 @@ class ArticleController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ArticleStoreRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|min:3',
-            'description' => 'required|string',
-        ]);
-
-        $article = Article::create([
-            'name' => $request->name,
-            'description' => $request->description,
-        ]);
+        $article = Article::create($request->except(['photo']));
 
         if ($request->hasFile('photo') && $request->file('photo')->isValid()) {
             $article->addMediaFromRequest('photo')->toMediaCollection('photo');
@@ -68,18 +61,9 @@ class ArticleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Article $article)
+    public function update(ArticleUpdateRequest $request, Article $article)
     {
-
-        $request->validate([
-            'name' => 'required|string|min:3',
-            'description' => 'required|string',
-        ]);
-
-        $article->update([
-            'name' => $request->name,
-            'description' => $request->description,
-        ]);
+        $article->update($request->except(['photo']));
 
         if ($request->hasFile('photo') && $request->file('photo')->isValid()) {
             $article->clearMediaCollection('photo');

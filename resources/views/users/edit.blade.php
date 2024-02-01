@@ -60,8 +60,9 @@
                             <div class="mb-3">
                                 <label for="role" class="form-label">Role</label>
                                 <select class="form-control @error('role') is-invalid @enderror" id="role" name="role" required autocomplete="role" autofocus>
-                                    <option value="admin" {{ old('role') == 'admin' ? 'selected' : null }}>Admin</option>
-                                    <option value="teacher" {{ old('role') == 'teacher' ? 'selected' : null }}>Teacher</option>
+                                    @foreach(\App\Enums\RoleEnum::all() as $value => $label)
+                                    <option value="{{ $value }}" {{ old('role', $student->role) == $value ? 'selected' : null }}>{{ $label }}</option>
+                                    @endforeach
                                 </select>
 
                                 @error('role')
