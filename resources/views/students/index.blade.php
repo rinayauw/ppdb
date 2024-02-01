@@ -54,7 +54,11 @@
                             </thead>
                             <tbody>
                                 @foreach($students as $i => $student)
+                                @if($student->status == 'rejected')
+                                <tr class="align-middle bg-danger text-dark"> gatau dechex bentar
+                                    @else
                                 <tr class="align-middle">
+                                    @endif
                                     <td class="text-center">{{ ++$i }}</td>
                                     <td>{{ $student->name }}</td>
                                     <td>{{ $student->birth }}</td>
@@ -69,7 +73,9 @@
                                             @csrf
                                             @method('delete')
 
+                                            @if($student->status != 'rejected')
                                             <a href="{{ route('students.show', $student->id) }}" class="btn btn-sm btn-info">Show</a>
+                                            @endif
                                             <a href="{{ route('students.edit', $student->id) }}" class="btn btn-sm btn-warning">Edit</a>
                                             <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                                         </form>

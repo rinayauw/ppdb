@@ -61,8 +61,9 @@
                             <div class="form-group">
                                 <label>Gender</label>
                                 <select class="form-control @error('gender') is-invalid @enderror" name="gender" required autocomplete="gender" autofocus>
-                                    <option value="male" {{ old('gender', $student->gender) == "male" ? 'selected' : null  }}>Male</option>
-                                    <option value="female" {{ old('gender', $student->gender) == "female" ? 'selected' : null  }}>Famele</option>
+                                    @foreach(\App\Enums\GenderEnum::all() as $value => $label)
+                                    <option value="{{ $value }}" {{ old('gender', $student->gender) == $value ? 'selected' : null }}>{{ $label }}</option>
+                                    @endforeach
                                 </select>
 
                                 @error('gender')
@@ -74,11 +75,9 @@
                             <div class="form-group">
                                 <label>Religion</label>
                                 <select class="form-control @error('religion') is-invalid @enderror" name="religion" required autocomplete="religion" autofocus>
-                                    <option value="islam" {{ old('religion', $student->religion) == "islam" ? 'selected' : null  }}>Islam</option>
-                                    <option value="kristen" {{ old('religion', $student->religion) == "kristen" ? 'selected' : null  }}>Kristen</option>
-                                    <option value="buddha" {{ old('religion', $student->religion) == "buddha" ? 'selected' : null  }}>Buddha</option>
-                                    <option value="hindu" {{ old('religion', $student->religion) == "hindu" ? 'selected' : null  }}>Hindu</option>
-                                    <option value="konghucu" {{ old('religion', $student->religion) == "konghucu" ? 'selected' : null  }}>Konghucu</option>
+                                    @foreach(\App\Enums\ReligionEnum::all() as $value => $label)
+                                    <option value="{{ $value }}" {{ old('religion', $student->religion) == $value ? 'selected' : null }}>{{ $label }}</option>
+                                    @endforeach
                                 </select>
 
                                 @error('religion')
@@ -103,9 +102,9 @@
                             <div class="form-group">
                                 <label>Status</label>
                                 <select class="form-control @error('status') is-invalid @enderror" name="status" required autocomplete="status" autofocus>
-                                    <option value="pending" {{ old('status', $student->status) == "pending" ? 'selected' : null  }}>Pending</option>
-                                    <option value="accepted" {{ old('status', $student->status) == "accepted" ? 'selected' : null  }}>Accepted</option>
-                                    <option value="rejected" {{ old('status', $student->status) == "rejected" ? 'selected' : null  }}>Rejected</option>
+                                    @foreach(\App\Enums\StudentStatusEnum::all() as $value => $label)
+                                    <option value="{{ $value }}" {{ old('status', $student->status) == $value ? 'selected' : null }}>{{ $label }}</option>
+                                    @endforeach
                                 </select>
 
                                 @error('status')

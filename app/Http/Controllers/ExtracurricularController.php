@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ExtracurricularStoreRequest;
+use App\Http\Requests\ExtracurricularUpdateRequest;
 use App\Models\Extracurricular;
 use Illuminate\Http\Request;
 
@@ -28,16 +30,10 @@ class ExtracurricularController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ExtracurricularStoreRequest $request)
     {
 
-        $request->validate([
-            'name' => 'required|string|min:3',
-        ]);
-
-        Extracurricular::create([
-            'name' => $request->name,
-        ]);
+        $extracurricular = Extracurricular::create($request->all());
 
         session()->flash('status', 'Data created successfully');
         return to_route('extracurriculars.index');
@@ -62,15 +58,9 @@ class ExtracurricularController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Extracurricular $extracurricular)
+    public function update(ExtracurricularUpdateRequest $request, Extracurricular $extracurricular)
     {
-        $request->validate([
-            'name' => 'required|string|min:3',
-        ]);
-
-        $extracurricular->update([
-            'name' => $request->name,
-        ]);
+        $extracurricular->update($request->all());
 
         session()->flash('status', 'Data updated successfully');
         return to_route('extracurriculars.index');
